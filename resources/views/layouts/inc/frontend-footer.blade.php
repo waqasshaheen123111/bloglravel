@@ -11,7 +11,7 @@
         <h4 class="about_text">About Us</h4>
         <p class="dolor_text">ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</p>
       </div>
-      <div class="col-lg-3 col-sm-6">
+      <div class="col-lg-3 col-sm-6">saad
         <h4 class="about_text">Instagram</h4>
         <div class="footer_images">
           <div class="footer_images_left">
