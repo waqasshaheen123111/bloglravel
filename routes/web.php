@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 // Auth::routes();
 // Frontend
-Route::get('/',[App\Http\Controllers\Frontend\FrontendController::class,'index'])->name('home');
+Route::get('/',[App\Http\Controllers\Frontend\FrontendController::class,'index']);
 Route::get('tutorial/{category_slug}',[App\Http\Controllers\Frontend\FrontendController::class,'viewCategoryPost'])->name('view.category');
 Route::get('tutorial/{category_slug}/{post_slug}',[App\Http\Controllers\Frontend\FrontendController::class,'viewPost'])->name('view.post');
 
