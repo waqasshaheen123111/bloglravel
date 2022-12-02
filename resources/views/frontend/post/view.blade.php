@@ -19,14 +19,61 @@
                     
                     
                     <div class="card card-shadow mt-4">
-                        <div class="card-body">
+                        <div class="card-body post-description">
                         {!!$post->description!!}
                         </div>
                     </div>
-
-
+                    @if (session('message'))
+                    <div class="alert alert-success">{{session('message')}}</div>
+                  @endif
+                    <div class="comment-area mt-4">
+                        <div class="card card-body">
+                            <h6 class="card-title">Leave a comment</h6>
+                            <form action="{{url('comment')}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="post_slug" value="{{$post->slug}}">
+                                <textarea name="comment_body" id=""  rows="3" class="form-control" required></textarea>
+                                <button  type="submit" class="btn btn-primary mt-3">
+                                    Submit
+                                </button>
+    
+                            </form>
+                        </div>
+                        @forelse ($post->comments as $comment)
+                            
+                      
+                        <div class="card card-body shadow-sm-mt-3">
+                            <div class="detail-area">
+                                <h6 class="user-name mb-1">
+                                    @if ($comment->user)
+                                        
+                                   
+                                   {{$comment->user->name}}
+                                   @endif
+                                    <small class="ms-3 text-primary"> Commented On: {{$comment->created_at->format('d-m-Y')}}</small>
+                                </h6>
+                                <p class="user-comment mb-1">
+                                   {!!$comment->comment_body!!}
+    
+                                </p>
+                            </div>
+                            @if (Auth::id()==$comment->user_id)
+                                
+                           
+                                
+                            <div class="">
+                                <a href="" class="btn btn-primary btn-sm me-2">Edit</a>
+                                <a href="" class="btn btn-danger btn-sm me-2">Delete</a>
+                            </div>
+                            @endif
+                        </div>
+                        @empty
+                            <h4>No comments yet</h4>
+                        @endforelse
+                    </div>
 
                 </div>
+               
 
 
                 <div class="col-md-4">

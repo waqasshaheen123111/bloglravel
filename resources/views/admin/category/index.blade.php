@@ -16,6 +16,7 @@
           @if (session('message'))
             <div class="alert alert-success">{{session('message')}}</div>
           @endif
+          <div class="table-responsive">
           <table id="mydataTable" class="table table-hover">
             <thead>
               <tr>
@@ -58,6 +59,7 @@
                   
                   </tbody>
               </table>
+            </div>
  
        </div>
     </div>

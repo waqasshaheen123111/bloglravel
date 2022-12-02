@@ -14,6 +14,7 @@
             @if (session('message'))
             <div class="alert alert-success">{{session('message')}}</div>
           @endif
+          <div class="table-responsive">
           <table id="mydataTable" class="table table-hover">
             <thead>
               <tr>
@@ -64,10 +65,14 @@
                   
                   </tbody>
               </table>
+            </div>
         </div>
     </div>
 </div>
 
+
+@endsection
+@section('script')
 <script>
   function archiveFunction() {
 event.preventDefault(); // prevent form submit
