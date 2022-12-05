@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Frontend\FrontendController;
 
 /*
@@ -22,10 +23,12 @@ Route::get('/', function () {
 
 // Auth::routes();
 // Frontend
+
 Route::get('/',[App\Http\Controllers\Frontend\FrontendController::class,'index']);
 Route::get('tutorial/{category_slug}',[App\Http\Controllers\Frontend\FrontendController::class,'viewCategoryPost']);
 Route::get('tutorial/{category_slug}/{post_slug}',[App\Http\Controllers\Frontend\FrontendController::class,'viewPost']);
 Route::post('comment',[App\Http\Controllers\Frontend\CommentsController::class,'store']);
+Route::post('delete-comment',[App\Http\Controllers\Frontend\CommentsController::class,'destroy']);
 
 
 
@@ -59,7 +62,9 @@ Route::prefix('admin')->middleware(['isAdmin'])->group(function () {
     Route::get('delete-user/{user_id}',[ App\Http\Controllers\Admin\UserController::class,'destroy']);
 
 
-
+// For Setting Website
+    Route::get('setting',[ App\Http\Controllers\Admin\SettingController::class,'index']);
+    Route::post('add-settings',[ App\Http\Controllers\Admin\SettingController::class,'store']);
 
 
 

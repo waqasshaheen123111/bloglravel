@@ -40,5 +40,30 @@ class CommentsController extends Controller
             return redirect('login')->with('message','Please login first to comment');
         }
 
+
+    }
+    public function destroy(Request $request){
+        if (Auth::check()) {
+            $comment=Comment::where('id',$request->comment_id)->where('user_id',Auth::id())->first();
+            if ($comment) {
+                $comment->delete();
+                return response()->json([
+                    'status'=>200,
+                    'message'=>'Comment deleted Successfully'
+                ]);
+            }else{
+                return response()->json([
+                    'status'=>500,
+                    'message'=>'Something went wrong'
+                ]);
+            }
+           
+        }
+        else{
+            return response()->json([
+                'status'=>401,
+                'message'=>'Please Login first to comment'
+            ]);
+        }
     }
 }

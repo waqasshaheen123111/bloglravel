@@ -2,10 +2,8 @@
 @section('title',"$post->name")
 @section('meta_description',"$post->meta_description")
 @section('meta_keyword',"$post->meta_keyword")
-
-
-
 @section('content')
+
 <div class="py-4">
     <div class="container">
         <div class="row">
@@ -42,7 +40,7 @@
                         @forelse ($post->comments as $comment)
                             
                       
-                        <div class="card card-body shadow-sm-mt-3">
+                        <div class="card card-body shadow-sm-mt-3 mt-4" id="container_comment">
                             <div class="detail-area">
                                 <h6 class="user-name mb-1">
                                     @if ($comment->user)
@@ -61,9 +59,9 @@
                                 
                            
                                 
-                            <div class="">
+                            <div>
                                 <a href="" class="btn btn-primary btn-sm me-2">Edit</a>
-                                <a href="" class="btn btn-danger btn-sm me-2">Delete</a>
+                                <button type="button" onclick="archiveFunction()" value="{{$comment->id}}"  class="delete_comment btn btn-danger btn-sm me-2">Delete</button>
                             </div>
                             @endif
                         </div>
@@ -77,7 +75,7 @@
 
 
                 <div class="col-md-4">
-                    <div class="border p-2 my-2" >
+                    <div id="old" class=" ad border p-2 my-2" >
                         <h3>Advertising Area</h3>
                     </div>
                     <div class="border p-2 my-2" >
@@ -86,7 +84,7 @@
                     <div class="border p-2 my-2" >
                         <h3>Advertising Area</h3>
                     </div>
-                    <div class="card mt-4">
+                    <div  class="card mt-4">
                         <div class="card-header">
                             <h4>Latest Posts</h4>
                         </div>
@@ -109,10 +107,78 @@
 
 
 
-            </div>
+         </div>
                 
             
-        </div>
+</div>
+
+@endsection
+@section('scripts')
+<script>
+     $(document).ready(function () {
+        $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }   
+});
+$(document).on('click','.delete_comment', function () {
+    alert("Hello Ajax");     
+    if (confirm('Are you sure to delete this')) {
+        var thisClicked=$(this);
+        var comment_id=thisClicked.val();
+       thisClicked.closest('#container_comment').remove();
+        $.ajax({
+            type: "POST",
+            url: "/delete-comment",
+            data:{
+                'comment_id': comment_id
+            },
+            dataType: "dataType",
+            success: function (res) {
+                if (res.status==200) {
+                    thisClicked.closest('#container_comment').remove();
+                    alert(res.message);
+                }else{
+                    alert(res.message);
+                }
+            }
+        });
+    }
+});
+    });
+    function archiveFunction() {
+        event.preventDefault(); // prevent form submit
+        var form = event.target.form; // storing the form
+                swal({
+        title: "Are you sure?",
+        text: "But you will still be able to retrieve this file.",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, Delete it!",
+        cancelButtonText: "No, cancel please!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+        },
+        function(isConfirm){
+        if (isConfirm) {
+            form.submit();          // submitting the form when user press yes
+        } else {
+            swal("Cancelled", "Your imaginary file is safe :)", "error");
+        }
+        });
+}
+        
+
+</script>
+@endsection
+
+
+
+
+       
+       
         
         
-        @endsection
+       
+       

@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="border p-2">
+                <div id="box" class="border p-2">
                     <h3>Advertising Area</h3>
                 </div>
             </div>

@@ -2,9 +2,16 @@
 <div class="global-navbar bg-white">
     <div class="container">
         <div class="row">
+          @php
+              $setting=App\Models\Setting::find(1);
+          @endphp
+            @if ($setting)
+                
+            
             <div class="col-md-3">
-                <img src="{{asset('assets/images/logoo.png')}}"   class="w-100" alt="img">
+                <img src="{{asset('uploads/setting/'.$setting->logo)}}"   class="w-50" alt="img">
             </div>
+            @endif
             <div class="col-md-9 my-auto">
                 <div class="border text-center p-2">
                     <h5>Advertisment Here</h5>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('title',"Shaheen Blogger")
-@section('meta_description',"Shaheen Blogs")
-@section('meta_keyword',"Shaheen Blogger")
+@section('title',"$setting->website_name")
+@section('meta_description',"$setting->meta_description")
+@section('meta_keyword',"$setting->meta_keyword")
 
 
 @section('content')
@@ -15,7 +15,7 @@
                     @foreach ($category as $cat_item)
                        @if(!$cat_item->posts->isEmpty()) 
                         <div class="item">
-                            <a href="{{url('tutorial/'.$cat_item->slug)}}" class="text-decoration-none">
+                            <a href="{{url('tutorial/'.$cat_item->slug)}}" class="text-decoration-none text-dark" >
                                     <div class="card">
 
                                         
